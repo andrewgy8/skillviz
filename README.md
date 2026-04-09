@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.svg" alt="SkillViz logo" width="300"/>
+  <img src="https://raw.githubusercontent.com/andrewgy8/skillviz/main/logo.png" alt="SkillViz logo" width="300"/>
 </p>
 
 <h1 align="center">SkillViz</h1>
@@ -15,7 +15,7 @@ Claude Code skills are a lot like functions: they do a specific thing, and they 
 SkillViz makes this visible. It scans your `~/.claude/skills/` directory, finds cross-skill calls and service usage, and renders the whole thing as a graph. It also helps with discoverability, since it's surprisingly easy to forget what skills you have installed and how they relate to each other.
 
 <p align="center">
-  <img src="examples/demo.gif" alt="Interactive skill graph demo" width="100%"/>
+  <img src="https://raw.githubusercontent.com/andrewgy8/skillviz/main/examples/demo.gif" alt="Interactive skill graph demo" width="100%"/>
 </p>
 
 <p align="center"><em>Red edges are skill-to-skill calls, gray dashed edges are service integrations. <a href="https://andrewgy8.github.io/skillviz/demo-graph.html">Try the interactive version.</a></em></p>
