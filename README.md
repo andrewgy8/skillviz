@@ -8,7 +8,17 @@
 
 ---
 
-SkillViz scans your `~/.claude/skills/` directory, finds cross-skill calls and service usage, and renders the whole thing as a graph via Graphviz.
+## Why?
+
+Claude Code skills are a lot like functions: they do a specific thing, and they can call other skills to get their job done. Once you have a dozen or more installed, the dependency chain gets hard to keep in your head. Which skills call which? What services does each one touch? You end up scanning through SKILL.md files trying to piece it together.
+
+SkillViz makes this visible. It scans your `~/.claude/skills/` directory, finds cross-skill calls and service usage, and renders the whole thing as a graph. It also helps with discoverability, since it's surprisingly easy to forget what skills you have installed and how they relate to each other.
+
+<p align="center">
+  <img src="examples/demo-graph.svg" alt="Example skill graph" width="100%"/>
+</p>
+
+<p align="center"><em>Example graph from a real skill setup. Red edges are skill-to-skill calls, gray dashed edges are service integrations.</em></p>
 
 ## Install
 
@@ -16,7 +26,7 @@ SkillViz scans your `~/.claude/skills/` directory, finds cross-skill calls and s
 pip install skillviz
 ```
 
-You also need the Graphviz system binary:
+You also need the Graphviz system binary for SVG/PNG/PDF output:
 
 ```bash
 # macOS
@@ -26,7 +36,11 @@ brew install graphviz
 apt install graphviz
 ```
 
+Graphviz is not required for the interactive HTML output or the menu bar app.
+
 ## Usage
+
+### CLI (Graphviz output)
 
 ```bash
 # Defaults: reads ~/.claude/skills/, writes ./skill-graph.svg
@@ -38,6 +52,33 @@ skillviz -o my-graph -f png
 # Custom skills directory
 skillviz --skills-dir /path/to/skills
 ```
+
+### Interactive HTML graph
+
+The HTML renderer generates a self-contained file with zoom, pan, hover tooltips, and physics-based layout. No browser extensions or JS dependencies needed.
+
+```python
+from skillviz.scanner import build_graph
+from skillviz.html_renderer import render_html
+
+skills, _ = build_graph(Path.home() / ".claude" / "skills")
+render_html(skills, Path.home() / ".claude" / "skill-graph.html")
+```
+
+Then open `~/.claude/skill-graph.html` in any browser.
+
+### Menu bar app (macOS)
+
+A menu bar app that lives in your toolbar as a shrimp icon. Click it to regenerate and open the interactive graph.
+
+```bash
+skillviz-menubar
+```
+
+Menu options:
+- **Open Graph** -- scan skills, generate HTML, open in browser
+- **Refresh** -- regenerate the HTML without reopening
+- **Quit**
 
 ## What it detects
 
@@ -54,6 +95,7 @@ If you pass a `--config` YAML, skills can be grouped into named clusters with co
 ```bash
 git clone https://github.com/andrewgy8/skillviz.git
 cd skillviz
+uv run pytest tests/ -v
 uv run skillviz && open skill-graph.svg
 ```
 
