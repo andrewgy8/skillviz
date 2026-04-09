@@ -44,8 +44,8 @@ def test_skill_nodes_in_js_data(tmp_path):
     ]
     out = render_html(skills, tmp_path / "graph.html")
     content = out.read_text()
-    assert '"label": "alpha"' in content
-    assert '"label": "beta"' in content
+    assert '"label": "/alpha"' in content
+    assert '"label": "/beta"' in content
 
 
 def test_service_nodes_distinct_group(tmp_path):
@@ -69,7 +69,7 @@ def test_service_nodes_distinct_group(tmp_path):
     assert len(service_nodes) == 1
     assert service_nodes[0]["label"] == "Slack"
     assert len(skill_nodes) == 1
-    assert skill_nodes[0]["label"] == "alpha"
+    assert skill_nodes[0]["label"] == "/alpha"
 
 
 def _parse_edges(html_content):
@@ -131,9 +131,9 @@ def test_cluster_grouping(tmp_path):
     out = render_html(skills, tmp_path / "graph.html", clusters=clusters)
     nodes = _parse_nodes(out.read_text())
     skill_nodes = {n["label"]: n["group"] for n in nodes if n["group"] != "Services"}
-    assert skill_nodes["alpha"] == "Daily routine"
-    assert skill_nodes["beta"] == "Engineering"
-    assert skill_nodes["gamma"] == "Engineering"
+    assert skill_nodes["/alpha"] == "Daily routine"
+    assert skill_nodes["/beta"] == "Engineering"
+    assert skill_nodes["/gamma"] == "Engineering"
 
 
 def test_node_weights_affect_size(tmp_path):
@@ -147,8 +147,8 @@ def test_node_weights_affect_size(tmp_path):
     nodes = _parse_nodes(out.read_text())
     sizes = {n["label"]: n["size"] for n in nodes if n["group"] != "Services"}
     # alpha has highest weight (2 outgoing), beta and gamma have 1 each
-    assert sizes["alpha"] > sizes["beta"]
-    assert sizes["beta"] == sizes["gamma"]
+    assert sizes["/alpha"] > sizes["/beta"]
+    assert sizes["/beta"] == sizes["/gamma"]
 
 
 def test_edge_weights_affect_width(tmp_path):
@@ -180,5 +180,5 @@ def test_hover_tooltips_show_descriptions(tmp_path):
     ]
     out = render_html(skills, tmp_path / "graph.html")
     nodes = _parse_nodes(out.read_text())
-    alpha_node = [n for n in nodes if n["label"] == "alpha"][0]
+    alpha_node = [n for n in nodes if n["label"] == "/alpha"][0]
     assert alpha_node["title"] == "Manages daily routines"

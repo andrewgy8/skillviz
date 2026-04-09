@@ -72,7 +72,7 @@ def _build_graph_data(
         nodes.append(
             {
                 "id": skill.name,
-                "label": skill.name,
+                "label": f"/{skill.name}",
                 "title": skill.description,
                 "group": skill_to_cluster.get(skill.name, "Uncategorized"),
                 "size": size,

@@ -145,7 +145,7 @@ def render(
                 pw = _penwidth(w, 1.5, 4.0, max_weight)
                 sub.node(
                     sname,
-                    label=sname,
+                    label=f"/{sname}",
                     fillcolor=color,
                     penwidth=pw,
                     tooltip=skill_map[sname].description[:120],

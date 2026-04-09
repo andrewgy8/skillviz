@@ -1,10 +1,17 @@
 """Tests for the menu bar app module."""
 
+import sys
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
-from skillviz.menubar import SkillVizApp
-from skillviz.scanner import Skill
+import pytest
+
+pytestmark = pytest.mark.skipif(
+    sys.platform != "darwin", reason="menubar requires macOS"
+)
+
+from skillviz.menubar import SkillVizApp  # noqa: E402
+from skillviz.scanner import Skill  # noqa: E402
 
 
 def _make_skill(name):
@@ -19,15 +26,10 @@ def _make_skill(name):
 
 
 def test_app_has_correct_menu_items():
-    with patch("skillviz.menubar.rumps") as mock_rumps:
-        mock_rumps.App = MagicMock()
-        mock_rumps.MenuItem = MagicMock(
-            side_effect=lambda title: MagicMock(title=title)
-        )
-        app = SkillVizApp()
-        menu_titles = [item.title for item in app.menu_items]
-        assert "Open Graph" in menu_titles
-        assert "Refresh" in menu_titles
+    app = SkillVizApp()
+    menu_keys = list(app.menu.keys())
+    assert "Open Graph" in menu_keys
+    assert "Refresh" in menu_keys
 
 
 def test_open_graph_scans_renders_opens_browser(tmp_path):
@@ -41,7 +43,7 @@ def test_open_graph_scans_renders_opens_browser(tmp_path):
     ):
         mock_build.return_value = ([_make_skill("alpha")], [])
         app = SkillVizApp(skills_dir=skills_dir, output_path=output)
-        app._open_graph()
+        app.open_graph(None)
 
         mock_build.assert_called_once_with(skills_dir)
         assert output.exists()
@@ -57,10 +59,11 @@ def test_refresh_regenerates_without_browser(tmp_path):
     with (
         patch("skillviz.menubar.build_graph") as mock_build,
         patch("skillviz.menubar.webbrowser") as mock_browser,
+        patch("skillviz.menubar.rumps"),
     ):
         mock_build.return_value = ([_make_skill("alpha")], [])
         app = SkillVizApp(skills_dir=skills_dir, output_path=output)
-        app._refresh()
+        app.refresh(None)
 
         mock_build.assert_called_once_with(skills_dir)
         assert output.exists()

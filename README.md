@@ -26,38 +26,14 @@ SkillViz makes this visible. It scans your `~/.claude/skills/` directory, finds 
 pip install skillviz
 ```
 
-You also need the Graphviz system binary for SVG/PNG/PDF output:
-
-```bash
-# macOS
-brew install graphviz
-
-# Debian/Ubuntu
-apt install graphviz
-```
-
-Graphviz is not required for the interactive HTML output or the menu bar app.
-
 ## Usage
-
-### CLI (Graphviz output)
-
-```bash
-# Defaults: reads ~/.claude/skills/, writes ./skill-graph.svg
-skillviz
-
-# PNG output with a custom name
-skillviz -o my-graph -f png
-
-# Custom skills directory
-skillviz --skills-dir /path/to/skills
-```
 
 ### Interactive HTML graph
 
-The HTML renderer generates a self-contained file with zoom, pan, hover tooltips, and physics-based layout. No browser extensions or JS dependencies needed.
+The default and recommended way to use SkillViz. Generates a self-contained HTML file with zoom, pan, hover tooltips, and physics-based layout. No browser extensions or JS dependencies needed -- just open the file.
 
 ```python
+from pathlib import Path
 from skillviz.scanner import build_graph
 from skillviz.html_renderer import render_html
 
@@ -65,7 +41,7 @@ skills, _ = build_graph(Path.home() / ".claude" / "skills")
 render_html(skills, Path.home() / ".claude" / "skill-graph.html")
 ```
 
-Then open `~/.claude/skill-graph.html` in any browser.
+Then open `~/.claude/skill-graph.html` in any browser. See the [live demo](https://andrewgy8.github.io/skillviz/examples/demo-graph.html) for what this looks like.
 
 ### Menu bar app (macOS)
 
@@ -79,6 +55,31 @@ Menu options:
 - **Open Graph** -- scan skills, generate HTML, open in browser
 - **Refresh** -- regenerate the HTML without reopening
 - **Quit**
+
+### Static image output (SVG/PNG/PDF)
+
+If you need a static image instead, the CLI renders via Graphviz. This requires the `dot` binary:
+
+```bash
+# macOS
+brew install graphviz
+
+# Debian/Ubuntu
+apt install graphviz
+```
+
+Then:
+
+```bash
+# Defaults: reads ~/.claude/skills/, writes ./skill-graph.svg
+skillviz
+
+# PNG output with a custom name
+skillviz -o my-graph -f png
+
+# Custom skills directory
+skillviz --skills-dir /path/to/skills
+```
 
 ## What it detects
 

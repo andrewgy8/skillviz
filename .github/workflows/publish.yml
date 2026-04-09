@@ -12,7 +12,7 @@ jobs:
       - uses: astral-sh/setup-uv@v4
       - run: uv run ruff check src/ tests/
       - run: uv run ruff format --check src/ tests/
-      - run: uv run ty check src/ tests/
+      - run: uv run ty check src/ tests/ --exclude '**/menubar.py' --exclude '**/test_menubar.py'
 
   test:
     runs-on: ubuntu-latest
