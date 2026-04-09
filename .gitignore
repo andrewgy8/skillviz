@@ -11,5 +11,8 @@ build/
 # Test output
 *.png
 
+# Generated version file
+src/skillviz/_version.py
+
 # Generated graphs
 skill-graph.svg

@@ -1,6 +1,6 @@
 [project]
 name = "skillviz"
-version = "0.1.0"
+dynamic = ["version"]
 description = "SkillViz - Visualize Claude Code skills as a graph"
 requires-python = ">=3.10"
 license = "MIT"
@@ -22,5 +22,11 @@ skillviz = "skillviz.cli:main"
 skillviz-menubar = "skillviz.menubar:main"
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/skillviz/_version.py"

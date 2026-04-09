@@ -99,6 +99,17 @@ uv run pytest tests/ -v
 uv run skillviz && open skill-graph.svg
 ```
 
+## Releasing
+
+Versions are derived from git tags via `hatch-vcs`, so there's no version to update manually. To publish a new release:
+
+```bash
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+The `publish` workflow will run lints, tests across Python 3.10-3.13, then build and publish to PyPI with the tag as the version.
+
 ## License
 
 MIT
