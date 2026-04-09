@@ -15,10 +15,10 @@ Claude Code skills are a lot like functions: they do a specific thing, and they 
 SkillViz makes this visible. It scans your `~/.claude/skills/` directory, finds cross-skill calls and service usage, and renders the whole thing as a graph. It also helps with discoverability, since it's surprisingly easy to forget what skills you have installed and how they relate to each other.
 
 <p align="center">
-  <img src="examples/demo-graph.svg" alt="Example skill graph" width="100%"/>
+  <img src="examples/demo.gif" alt="Interactive skill graph demo" width="100%"/>
 </p>
 
-<p align="center"><em>Example graph from a real skill setup. Red edges are skill-to-skill calls, gray dashed edges are service integrations.</em></p>
+<p align="center"><em>Red edges are skill-to-skill calls, gray dashed edges are service integrations. <a href="https://andrewgy8.github.io/skillviz/demo-graph.html">Try the interactive version.</a></em></p>
 
 ## Install
 
@@ -41,7 +41,7 @@ skills, _ = build_graph(Path.home() / ".claude" / "skills")
 render_html(skills, Path.home() / ".claude" / "skill-graph.html")
 ```
 
-Then open `~/.claude/skill-graph.html` in any browser. See the [live demo](https://andrewgy8.github.io/skillviz/examples/demo-graph.html) for what this looks like.
+Then open `~/.claude/skill-graph.html` in any browser. See the [live demo](https://andrewgy8.github.io/skillviz/demo-graph.html) for what this looks like.
 
 ### Menu bar app (macOS)
 

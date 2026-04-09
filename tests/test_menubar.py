@@ -1,17 +1,10 @@
-"""Tests for the menu bar app module."""
+"""Tests for the menu bar app module (macOS only, skipped on other platforms via conftest)."""
 
-import sys
 from pathlib import Path
 from unittest.mock import patch
 
-import pytest
-
-pytestmark = pytest.mark.skipif(
-    sys.platform != "darwin", reason="menubar requires macOS"
-)
-
-from skillviz.menubar import SkillVizApp  # noqa: E402
-from skillviz.scanner import Skill  # noqa: E402
+from skillviz.menubar import SkillVizApp
+from skillviz.scanner import Skill
 
 
 def _make_skill(name):
