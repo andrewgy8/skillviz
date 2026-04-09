@@ -25,6 +25,9 @@ skillviz-menubar = "skillviz.menubar:main"
 requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
+[tool.ruff]
+extend-exclude = ["src/skillviz/_version.py"]
+
 [tool.hatch.version]
 source = "vcs"
 
