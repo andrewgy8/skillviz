@@ -223,7 +223,7 @@ source = { editable = "." }
 dependencies = [
     { name = "graphviz" },
     { name = "pyyaml" },
-    { name = "rumps" },
+    { name = "rumps", marker = "sys_platform == 'darwin'" },
 ]
 
 [package.dev-dependencies]
@@ -237,7 +237,7 @@ dev = [
 requires-dist = [
     { name = "graphviz", specifier = ">=0.20" },
     { name = "pyyaml", specifier = ">=6.0" },
-    { name = "rumps", specifier = ">=0.4.0" },
+    { name = "rumps", marker = "sys_platform == 'darwin'", specifier = ">=0.4.0" },
 ]
 
 [package.metadata.requires-dev]
