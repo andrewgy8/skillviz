@@ -7,7 +7,6 @@ license = "MIT"
 dependencies = [
     "graphviz>=0.20",
     "pyyaml>=6.0",
-    "rumps>=0.4.0; sys_platform == 'darwin'",
 ]
 
 [dependency-groups]
@@ -19,7 +18,6 @@ dev = [
 
 [project.scripts]
 skillviz = "skillviz.cli:main"
-skillviz-menubar = "skillviz.menubar:main"
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]

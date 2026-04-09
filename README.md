@@ -43,19 +43,6 @@ render_html(skills, Path.home() / ".claude" / "skill-graph.html")
 
 Then open `~/.claude/skill-graph.html` in any browser. See the [live demo](https://andrewgy8.github.io/skillviz/demo-graph.html) for what this looks like.
 
-### Menu bar app (macOS)
-
-A menu bar app that lives in your toolbar as a shrimp icon. Click it to regenerate and open the interactive graph.
-
-```bash
-skillviz-menubar
-```
-
-Menu options:
-- **Open Graph** -- scan skills, generate HTML, open in browser
-- **Refresh** -- regenerate the HTML without reopening
-- **Quit**
-
 ### Static image output (SVG/PNG/PDF)
 
 If you need a static image instead, the CLI renders via Graphviz. This requires the `dot` binary:

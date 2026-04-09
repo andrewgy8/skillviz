@@ -10,7 +10,7 @@ repos:
     hooks:
       - id: ty
         name: ty type check
-        entry: uv run ty check src/ tests/ --exclude '**/menubar.py' --exclude '**/test_menubar.py'
+        entry: uv run ty check src/ tests/
         language: system
         pass_filenames: false
         types: [python]
