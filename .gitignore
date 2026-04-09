@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+
+# Test output
+*.png
+
+# Generated graphs
+skill-graph.svg
